@@ -166,6 +166,8 @@ CREATE TABLE student_guardian (
 
 -- Administrative Staff
 
+INSERT INTO person_role (name) VALUES ('admin')
+
 CREATE TABLE admin(
     admin_id        SERIAL PRIMARY KEY,
     person_id       INTEGER NOT NULL,
