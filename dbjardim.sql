@@ -1,12 +1,23 @@
-# Set timezone to UTC-3 (Brasília Time)
+-- Set timezone to UTC-3 (Brasília Time)
 SET TIMEZONE TO 'UTC-3';
 
-# PERSON
+-- PERSON
 
 CREATE TABLE person_role (
     person_role_id  SERIAL PRIMARY KEY,
     name            VARCHAR(100) NOT NULL
 );
+
+CREATE TABLE address (
+    address_id      SERIAL PRIMARY KEY,
+    street          VARCHAR(255) NOT NULL,
+    street_number   VARCHAR(20) NOT NULL,
+    cep             VARCHAR(20) NOT NULL,
+    complement      VARCHAR(100),
+    city            VARCHAR(100) NOT NULL,
+    state           VARCHAR(100) NOT NULL
+);
+
 
 CREATE TABLE person (
     person_id       SERIAL PRIMARY KEY,
@@ -26,21 +37,21 @@ CREATE TABLE person (
     update_date     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (person_role_id) REFERENCES person_role(person_role_id),
-    FOREIGN KEY (address_id) REFERENCES address(address_id)
-);
-
-CREATE TABLE address (
-    address_id      SERIAL PRIMARY KEY,
-    street          VARCHAR(255) NOT NULL,
-    street_number   VARCHAR(20) NOT NULL,
-    cep             VARCHAR(20) NOT NULL,
-    complement      VARCHAR(100),
-    city            VARCHAR(100) NOT NULL,
-    state           VARCHAR(100) NOT NULL
+    FOREIGN KEY (address_id)     REFERENCES address(address_id)
 );
 
 
-# Student
+-- Student
+
+INSERT INTO person_role (name) VALUES ('STUDENT');
+
+CREATE TABLE student (
+    student_id      SERIAL PRIMARY KEY,
+    person_id       INTEGER NOT NULL,
+
+    FOREIGN KEY (person_id) REFERENCES person(person_id)
+);
+
 
 CREATE TABLE enrollment_status(
     enrollment_status_id SERIAL PRIMARY KEY,
@@ -70,31 +81,8 @@ CREATE TABLE enrollment_request(
     FOREIGN KEY (approved_by) REFERENCES person(person_id)
 );
 
-CREATE TABLE classroom (
-    classroom_id   SERIAL PRIMARY KEY,
-    identifier     VARCHAR(100) NOT NULL CHECK (identifier ~ '^[A-Z]{3}-\d{3}$')
-);
 
-CREATE TABLE classroom_group (
-    group_id        SERIAL PRIMARY KEY,
-    name            VARCHAR(100) NOT NULL,
-    series          VARCHAR(50) NOT NULL,
-    classroom_id    INTEGER NOT NULL,
-
-    FOREIGN KEY (classroom_id) REFERENCES classroom(classroom_id)
-);
-
-
-INSERT INTO person_role (name) VALUES ('STUDENT');
-
-CREATE TABLE student (
-    student_id      SERIAL PRIMARY KEY,
-    person_id       INTEGER NOT NULL,
-
-    FOREIGN KEY (person_id) REFERENCES person(person_id)
-);
-
-# Teacher
+-- Teacher
 
 INSERT INTO person_role (name) VALUES ('TEACHER');
 
@@ -120,7 +108,27 @@ CREATE TABLE teacher_subject (
     FOREIGN KEY (subject_id) REFERENCES study_subject(subject_id)
 );
 
-# Grading
+-- Classroom
+
+CREATE TABLE classroom (
+    classroom_id   SERIAL PRIMARY KEY,
+    identifier     VARCHAR(100) NOT NULL CHECK (identifier ~ '^[A-Z]{3}-\d{3}$')
+);
+
+CREATE TABLE classroom_group (
+    group_id        SERIAL PRIMARY KEY,
+    name            VARCHAR(100) NOT NULL,
+    series          VARCHAR(50) NOT NULL,
+    classroom_id    INTEGER NOT NULL,
+    teacher_id      INTEGER NOT NULL,
+
+    FOREIGN KEY (classroom_id) REFERENCES classroom(classroom_id),
+    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)
+    
+);
+
+
+-- Grading
 
 CREATE TABLE grading (
     grading_id          SERIAL PRIMARY KEY,
@@ -136,7 +144,7 @@ CREATE TABLE grading (
     FOREIGN KEY (given_by_teacher_id) REFERENCES teacher(teacher_id)
 );
 
-# Guardian
+-- Guardian
 
 INSERT INTO person_role (name) VALUES ('GUARDIAN');
 
@@ -156,7 +164,7 @@ CREATE TABLE student_guardian (
     FOREIGN KEY (guardian_id) REFERENCES guardian(guardian_id)
 );
 
-# Administrative Staff
+-- Administrative Staff
 
 CREATE TABLE admin(
     admin_id        SERIAL PRIMARY KEY,
@@ -166,7 +174,7 @@ CREATE TABLE admin(
 );
 
 
-# School events
+-- School events
 
 CREATE TABLE school_event_type (
     event_type_id   SERIAL PRIMARY KEY,
