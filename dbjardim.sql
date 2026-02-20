@@ -1,6 +1,9 @@
 -- Set timezone to UTC-3 (Brasília Time)
 SET TIMEZONE TO 'UTC-3';
 
+-- Extensions
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- PERSON
 
 CREATE TABLE person_role (
@@ -14,7 +17,7 @@ CREATE TABLE person (
     first_name      VARCHAR(100) NOT NULL,
     last_name       VARCHAR(100) NOT NULL,
     email           VARCHAR(255) UNIQUE NOT NULL,
-    cpf             VARCHAR(14)  UNIQUE NOT NULL,
+    cpf             VARCHAR(11)  UNIQUE NOT NULL,
     phone_number    VARCHAR(20),
     password_hash   VARCHAR(255) NOT NULL,
     photo_url       VARCHAR(255),
