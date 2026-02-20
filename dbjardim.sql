@@ -8,16 +8,6 @@ CREATE TABLE person_role (
     name            VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE address (
-    address_id      SERIAL PRIMARY KEY,
-    street          VARCHAR(255) NOT NULL,
-    street_number   VARCHAR(20) NOT NULL,
-    cep             VARCHAR(20) NOT NULL,
-    complement      VARCHAR(100),
-    city            VARCHAR(100) NOT NULL,
-    state           VARCHAR(100) NOT NULL
-);
-
 
 CREATE TABLE person (
     person_id       SERIAL PRIMARY KEY,
@@ -31,13 +21,24 @@ CREATE TABLE person (
 
     person_role_id  INTEGER NOT NULL,
 
-    address_id      INTEGER NOT NULL,
-
     create_date     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_date     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (person_role_id) REFERENCES person_role(person_role_id),
-    FOREIGN KEY (address_id)     REFERENCES address(address_id)
+);
+
+-- Address
+CREATE TABLE address (
+    address_id      SERIAL PRIMARY KEY,
+    street          VARCHAR(255) NOT NULL,
+    street_number   VARCHAR(20) NOT NULL,
+    cep             VARCHAR(20) NOT NULL,
+    complement      VARCHAR(100),
+    city            VARCHAR(100) NOT NULL,
+    state           VARCHAR(100) NOT NULL,
+    person_id       INTEGER NOT NULL,
+
+    FOREIGN KEY (person_id) REFERENCES person(person_id)
 );
 
 
@@ -166,7 +167,7 @@ CREATE TABLE student_guardian (
 
 -- Administrative Staff
 
-INSERT INTO person_role (name) VALUES ('admin')
+INSERT INTO person_role (name) VALUES ('ADMIN')
 
 CREATE TABLE admin(
     admin_id        SERIAL PRIMARY KEY,
