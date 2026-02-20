@@ -4,6 +4,23 @@ SET TIMEZONE TO 'UTC-3';
 -- Extensions
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+-- Pre-eliminary DROP TABLES (for development purposes)
+DROP TABLE IF EXISTS student_guardian CASCADE;
+DROP TABLE IF EXISTS guardian CASCADE;
+DROP TABLE IF EXISTS student CASCADE;
+DROP TABLE IF EXISTS teacher_subject CASCADE;
+DROP TABLE IF EXISTS teacher CASCADE;
+DROP TABLE IF EXISTS study_subject CASCADE;
+DROP TABLE IF EXISTS admin CASCADE;
+DROP TABLE IF EXISTS person CASCADE;
+DROP TABLE IF EXISTS person_role CASCADE;
+DROP TABLE IF EXISTS address CASCADE;
+DROP TABLE IF EXISTS enrollment CASCADE;
+DROP TABLE IF EXISTS enrollment_status CASCADE;
+DROP TABLE IF EXISTS enrollment_request CASCADE;
+DROP TABLE IF EXISTS school_event CASCADE;
+DROP TABLE IF EXISTS school_event_type CASCADE;
+
 -- PERSON
 
 CREATE TABLE person_role (
@@ -147,8 +164,6 @@ CREATE TABLE grading (
 
 -- Guardian
 
-INSERT INTO person_role (name) VALUES ('GUARDIAN');
-
 CREATE TABLE guardian (
     guardian_id     SERIAL PRIMARY KEY,
     person_id       INTEGER NOT NULL,
@@ -167,8 +182,6 @@ CREATE TABLE student_guardian (
 
 -- Administrative Staff
 
-INSERT INTO person_role (name) VALUES ('ADMIN');
-
 CREATE TABLE admin(
     admin_id        SERIAL PRIMARY KEY,
     person_id       INTEGER NOT NULL,
@@ -183,8 +196,6 @@ CREATE TABLE school_event_type (
     event_type_id   SERIAL PRIMARY KEY,
     name            VARCHAR(100) NOT NULL
 );
-
-INSERT INTO school_event_type (name) VALUES ('EXAM'), ('HOLIDAY'), ('CYCLE'), ('OTHER');
 
 CREATE TABLE school_event (
     event_id        SERIAL PRIMARY KEY,
