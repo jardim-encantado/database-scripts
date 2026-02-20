@@ -12,5 +12,7 @@ TRUNCATE TABLE
     guardian,
     student,
     school_event,
-    school_event_type
+    school_event_type,
+	classroom,
+	classroom_group
 RESTART IDENTITY CASCADE;

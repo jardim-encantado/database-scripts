@@ -133,7 +133,7 @@ CREATE TABLE teacher_subject (
 
 CREATE TABLE classroom (
     classroom_id   SERIAL PRIMARY KEY,
-    identifier     VARCHAR(100) NOT NULL CHECK (identifier ~ '^[A-Z]{3}-\d{3}$')
+    identifier     VARCHAR(7) NOT NULL CHECK (identifier ~ '^[A-Z]{3}-\d{3}$')
 );
 
 CREATE TABLE classroom_group (
