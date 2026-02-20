@@ -24,7 +24,7 @@ CREATE TABLE person (
     create_date     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_date     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (person_role_id) REFERENCES person_role(person_role_id),
+    FOREIGN KEY (person_role_id) REFERENCES person_role(person_role_id)
 );
 
 -- Address
@@ -167,7 +167,7 @@ CREATE TABLE student_guardian (
 
 -- Administrative Staff
 
-INSERT INTO person_role (name) VALUES ('ADMIN')
+INSERT INTO person_role (name) VALUES ('ADMIN');
 
 CREATE TABLE admin(
     admin_id        SERIAL PRIMARY KEY,
