@@ -70,7 +70,6 @@ CREATE TABLE address (
 CREATE TABLE enrollment (
     enrollment_id        SERIAL PRIMARY KEY,
     enrollment_status    INTEGER,
-    student_id           INTEGER NOT NULL,
     enrollment_date      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     create_date          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_date          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
