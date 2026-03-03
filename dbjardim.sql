@@ -73,7 +73,7 @@ CREATE TABLE enrollment (
     student_id           INTEGER NOT NULL,
     enrollment_date      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     create_date          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    update_date          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    update_date          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE student (

@@ -119,3 +119,134 @@ VALUES ('EXAM'),
     ('STUDENT CYCLE'),
     ('OCCURRENCE'),
     ('OTHER');
+
+-------------------------------------------------------------------------------------------
+-- Classroom Groups
+
+INSERT INTO
+    classroom_group (name, series, classroom_id, teacher_id)
+VALUES ('Turma A', '1º Ano', 1, 1),
+    ('Turma B', '2º Ano', 2, 1),
+    ('Turma C', '3º Ano', 3, 3),
+    ('Turma D', '4º Ano', 4, 4);
+
+-------------------------------------------------------------------------------------------
+-- Guardians
+
+DO $$
+DECLARE
+    pid INTEGER;
+BEGIN
+    pid := create_person(
+        'Ana',
+        'Silva Costa',
+        'ana.costa@familia.com',
+        '12345678910',
+        '(11) 98888-1111',
+        'senha',
+        3
+    );
+    INSERT INTO guardian (person_id) VALUES (pid);
+
+    pid := create_person(
+        'Marcos',
+        'Silva Costa',
+        'marcos.costa@familia.com',
+        '12345678911',
+        '(11) 98888-2222',
+        'senha',
+        3
+    );
+    INSERT INTO guardian (person_id) VALUES (pid);
+END $$;
+
+-------------------------------------------------------------------------------------------
+-- Students
+
+DO $$
+DECLARE
+    pid INTEGER;
+BEGIN
+    pid := create_person(
+        'Lucas',
+        'Silva Costa',
+        'lucas.costa@aluno.com',
+        '12345678912',
+        '(11) 97777-1111',
+        'senha',
+        1
+    );
+    INSERT INTO student (person_id) VALUES (pid);
+
+    pid := create_person(
+        'Mariana',
+        'Silva Costa',
+        'mariana.costa@aluno.com',
+        '12345678913',
+        '(11) 97777-2222',
+        'senha',
+        1
+    );
+    INSERT INTO student (person_id) VALUES (pid);
+END $$;
+
+-------------------------------------------------------------------------------------------
+-- Student Guardian
+
+INSERT INTO
+    student_guardian (student_id, guardian_id)
+VALUES (1, 1),
+    (1, 2),
+    (2, 1),
+    (2, 2);
+
+-------------------------------------------------------------------------------------------
+-- Address
+
+INSERT INTO
+    address (street, street_number, cep, complement, city, state, person_id)
+VALUES ('Rua das Flores', '123', '01010-000', 'Apto 12', 'São Paulo', 'SP', 1),
+    ('Rua das Flores', '123', '01010-000', NULL, 'São Paulo', 'SP', 2),
+    ('Rua das Flores', '123', '01010-000', NULL, 'São Paulo', 'SP', 3),
+    ('Rua das Flores', '123', '01010-000', NULL, 'São Paulo', 'SP', 4);
+
+-------------------------------------------------------------------------------------------
+-- Enrollment Requests
+
+INSERT INTO
+    enrollment_request (student_id)
+VALUES (1),
+    (2);
+
+-------------------------------------------------------------------------------------------
+-- Enrollments
+
+INSERT INTO
+    enrollment (student_id, enrollment_status_id)
+VALUES (1, 2),
+    (2, 1);
+
+-------------------------------------------------------------------------------------------
+-- Grading
+
+INSERT INTO
+    grading (student_id, subject_id, grade, given_by_teacher_id)
+VALUES (1, 1, 8.5, 1),
+    (1, 2, 7.0, 1),
+    (2, 1, 9.2, 1),
+    (2, 4, 8.0, 3);
+
+-------------------------------------------------------------------------------------------
+-- School Events
+
+INSERT INTO
+    school_event (
+    name,
+    description,
+    event_date,
+    created_by,
+    event_type_id
+)
+VALUES ('Prova de Matemática', 'Avaliação do 1º bimestre', '2026-04-10 09:00:00', 1, 1),
+    ('Feriado - Tiradentes', 'Não haverá aula', '2026-04-21 00:00:00', 1, 2);
+
