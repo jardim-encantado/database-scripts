@@ -117,4 +117,5 @@ INSERT INTO
 VALUES ('EXAM'),
     ('HOLIDAY'),
     ('STUDENT CYCLE'),
+    ('OCCURRENCE'),
     ('OTHER');

@@ -65,44 +65,24 @@ CREATE TABLE address (
 );
 
 
--- Student
-
-CREATE TABLE student (
-    student_id      SERIAL PRIMARY KEY,
-    person_id       INTEGER NOT NULL,
-
-    FOREIGN KEY (person_id) REFERENCES person(person_id)
-);
-
-
-CREATE TABLE enrollment_status(
-    enrollment_status_id SERIAL PRIMARY KEY,
-    name                VARCHAR(100) NOT NULL
-);
+-- Student7
 
 CREATE TABLE enrollment (
     enrollment_id        SERIAL PRIMARY KEY,
-    enrollment_status_id INTEGER NOT NULL,
+    enrollment_status    INTEGER,
     student_id           INTEGER NOT NULL,
     enrollment_date      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     create_date          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_date          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (student_id)           REFERENCES student(student_id),
-    FOREIGN KEY (enrollment_status_id) REFERENCES enrollment_status(enrollment_status_id)
 );
 
-CREATE TABLE enrollment_request(
-    enrollment_request_id SERIAL PRIMARY KEY,
-    student_id            INTEGER NOT NULL,
-    request_date          TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    update_date           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    approved_by           INTEGER,
-
-    FOREIGN KEY (student_id)  REFERENCES student(student_id),
-    FOREIGN KEY (approved_by) REFERENCES person(person_id)
+CREATE TABLE student (
+    student_id      SERIAL PRIMARY KEY,
+    person_id       INTEGER NOT NULL,
+    enrollment_id   INTEGER NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES person(person_id),
+    FOREIGN KEY (enrollment_id) REFERENCES enrollment(enrollment_id)
 );
-
 
 -- Teacher
 
@@ -139,7 +119,7 @@ CREATE TABLE classroom (
 CREATE TABLE classroom_group (
     group_id        SERIAL PRIMARY KEY,
     name            VARCHAR(100) NOT NULL,
-    series          VARCHAR(50) NOT NULL,
+    series          VARCHAR(50)  NOT NULL,
     classroom_id    INTEGER NOT NULL,
     teacher_id      INTEGER NOT NULL,
 
@@ -208,7 +188,7 @@ CREATE TABLE school_event (
     created_by      INTEGER NOT NULL,
     create_date     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_date     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    event_type_id   INTEGER NOT NULL,
+    event_type_id      INTEGER NOT NULL,
 
     FOREIGN KEY (created_by) REFERENCES person(person_id),
     FOREIGN KEY (event_type_id) REFERENCES school_event_type(event_type_id)
