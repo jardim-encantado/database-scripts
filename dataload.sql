@@ -110,15 +110,6 @@ VALUES ('TER-001'),
     ('SEG-005'),
     ('SEG-006');
 
-----------------------------------------------------------------------------------------------
--- School Event Types
-INSERT INTO
-    school_event_type (name)
-VALUES ('EXAM'),
-    ('HOLIDAY'),
-    ('STUDENT CYCLE'),
-    ('OCCURRENCE'),
-    ('OTHER');
 
 -------------------------------------------------------------------------------------------
 -- Classroom Groups
@@ -229,6 +220,16 @@ VALUES (1, 1, 8.5, 'Aluno demonstrou bom desempenho', 1),
     (1, 2, 7.0, 'Aluno precisa melhorar na compreensão', 1),
     (2, 1, 9.2, 'Aluno se destacou em todas as atividades', 1),
     (2, 4, 8.0, 'Aluno apresentou desempenho satisfatório', 3);
+
+----------------------------------------------------------------------------------------------
+-- School Event Types
+INSERT INTO
+    school_event_type (name)
+VALUES ('EXAM'),
+    ('HOLIDAY'),
+    ('STUDENT CYCLE'),
+    ('OCCURRENCE'),
+    ('OTHER');
 
 -------------------------------------------------------------------------------------------
 -- School Events
