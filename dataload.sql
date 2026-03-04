@@ -140,7 +140,7 @@ BEGIN
     pid := create_person(
         'Ana',
         'Silva Costa',
-        'ana.costa@familia.com',
+        'ana.costa@gmail.com',
         '12345678910',
         '(11) 98888-1111',
         'senha',
@@ -151,7 +151,7 @@ BEGIN
     pid := create_person(
         'Marcos',
         'Silva Costa',
-        'marcos.costa@familia.com',
+        'marcos.costa@gmail.com',
         '12345678911',
         '(11) 98888-2222',
         'senha',
@@ -164,30 +164,24 @@ END $$;
 -- Students
 
 DO $$
-DECLARE
-    pid INTEGER;
 BEGIN
-    pid := create_person(
+    PERFORM create_student(
         'Lucas',
         'Silva Costa',
-        'lucas.costa@aluno.com',
+        'lucas.costa@jardimencantado.com',
         '12345678912',
         '(11) 97777-1111',
-        'senha',
-        1
+        'senha'
     );
-    INSERT INTO student (person_id) VALUES (pid);
 
-    pid := create_person(
+    PERFORM create_student(
         'Mariana',
         'Silva Costa',
-        'mariana.costa@aluno.com',
+        'mariana.costa@jardimencantado.com',
         '12345678913',
         '(11) 97777-2222',
-        'senha',
-        1
+        'senha'
     );
-    INSERT INTO student (person_id) VALUES (pid);
 END $$;
 
 -------------------------------------------------------------------------------------------
@@ -211,20 +205,19 @@ VALUES ('Rua das Flores', '123', '01010-000', 'Apto 12', 'São Paulo', 'SP', 1),
     ('Rua das Flores', '123', '01010-000', NULL, 'São Paulo', 'SP', 4);
 
 -------------------------------------------------------------------------------------------
--- Enrollment Requests
-
-INSERT INTO
-    enrollment_request (student_id)
-VALUES (1),
-    (2);
-
--------------------------------------------------------------------------------------------
 -- Enrollments
 
-INSERT INTO
-    enrollment (student_id, enrollment_status_id)
-VALUES (1, 2),
-    (2, 1);
+UPDATE enrollment AS e
+SET enrollment_status = 2
+FROM student AS s
+WHERE s.enrollment_id = e.enrollment_id
+    AND s.student_id = 1;
+
+UPDATE enrollment AS e
+SET enrollment_status = 1
+FROM student AS s
+WHERE s.enrollment_id = e.enrollment_id
+    AND s.student_id = 2;
 
 -------------------------------------------------------------------------------------------
 -- Grading
