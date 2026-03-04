@@ -208,13 +208,14 @@ VALUES ('Rua das Flores', '123', '01010-000', 'Apto 12', 'São Paulo', 'SP', 1),
 -- Enrollments
 
 UPDATE enrollment AS e
-SET enrollment_status = 2
+SET enrollment_status = 2, -- enrolled
+    enrollment_date = CURRENT_TIMESTAMP
 FROM student AS s
 WHERE s.enrollment_id = e.enrollment_id
     AND s.student_id = 1;
 
 UPDATE enrollment AS e
-SET enrollment_status = 1
+SET enrollment_status = 1 -- not yet enrolled no enrollment date
 FROM student AS s
 WHERE s.enrollment_id = e.enrollment_id
     AND s.student_id = 2;
@@ -223,11 +224,11 @@ WHERE s.enrollment_id = e.enrollment_id
 -- Grading
 
 INSERT INTO
-    grading (student_id, subject_id, grade, given_by_teacher_id)
-VALUES (1, 1, 8.5, 1),
-    (1, 2, 7.0, 1),
-    (2, 1, 9.2, 1),
-    (2, 4, 8.0, 3);
+    grading (student_id, subject_id, grade, observations, given_by_teacher_id)
+VALUES (1, 1, 8.5, 'Aluno demonstrou bom desempenho', 1),
+    (1, 2, 7.0, 'Aluno precisa melhorar na compreensão', 1),
+    (2, 1, 9.2, 'Aluno se destacou em todas as atividades', 1),
+    (2, 4, 8.0, 'Aluno apresentou desempenho satisfatório', 3);
 
 -------------------------------------------------------------------------------------------
 -- School Events
