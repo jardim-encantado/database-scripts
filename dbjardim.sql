@@ -135,6 +135,7 @@ CREATE TABLE grading (
     student_id          INTEGER NOT NULL,
     subject_id          INTEGER NOT NULL,
     grade               DECIMAL(5, 2) NOT NULL CHECK (grade >= 0 AND grade <= 10),
+    observations        TEXT,
     grading_date        TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_date         TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     given_by_teacher_id INTEGER NOT NULL,
