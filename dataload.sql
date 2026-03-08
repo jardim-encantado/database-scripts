@@ -193,7 +193,14 @@ INSERT INTO
 VALUES ('Rua das Flores', '123', '01010-000', 'Apto 12', 'São Paulo', 'SP', 1),
     ('Rua das Flores', '123', '01010-000', NULL, 'São Paulo', 'SP', 2),
     ('Rua das Flores', '123', '01010-000', NULL, 'São Paulo', 'SP', 3),
-    ('Rua das Flores', '123', '01010-000', NULL, 'São Paulo', 'SP', 4);
+    ('Rua das Flores', '123', '01010-000', NULL, 'São Paulo', 'SP', 4),
+    ('Rua das Flores', '125', '01010-000', NULL, 'São Paulo', 'SP', 5),
+    ('Rua das Flores', '127', '01010-000', NULL, 'São Paulo', 'SP', 6),
+    ('Rua das Flores', '129', '01010-000', NULL, 'São Paulo', 'SP', 7),
+    ('Rua das Flores', '131', '01010-000', NULL, 'São Paulo', 'SP', 8),
+    ('Rua das Flores', '133', '01010-000', NULL, 'São Paulo', 'SP', 9),
+    ('Rua das Flores', '135', '01010-000', NULL, 'São Paulo', 'SP', 10),
+    ('Rua das Flores', '137', '01010-000', NULL, 'São Paulo', 'SP', 11);
 
 -------------------------------------------------------------------------------------------
 -- Enrollments
