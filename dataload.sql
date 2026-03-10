@@ -19,7 +19,7 @@ BEGIN
     pid := create_person(
         'Root',
         'Eterno da Conceição Jardim',
-        'admin@jardimencantado.com',
+        'admin@jardim.com',
         '12345678900',
         '(11) 99999-9999',
         'senha',
@@ -56,32 +56,32 @@ DECLARE
     tid INTEGER; -- Teacher ID
 BEGIN
     -- 1. Raissa Marconato (Early Elementary / Polivalente)
-    pid := create_person('Raissa', 'Marconato', 'raissa.marconato@jardimencantado.com', '12345678902', '(11) 99999-9997', 'senha', 2);
+    pid := create_person('Raissa', 'Marconato', 'raissa.marconato@jardim.com', '12345678902', '(11) 99999-9997', 'senha', 2);
     INSERT INTO teacher (person_id) VALUES (pid) RETURNING teacher_id INTO tid;
     INSERT INTO teacher_subject (teacher_id, subject_id) VALUES (tid, 1), (tid, 2), (tid, 3), (tid, 4), (tid, 5), (tid, 6);
 
     -- 2. Carlos Santi (Tecnologia)
-    pid := create_person('Carlos', 'Eduardo Santi', 'carlos.santi@jardimencantado.com', '12345678903', '(11) 99999-9998', 'senha', 2);
+    pid := create_person('Carlos', 'Santi', 'carlos.santi@jardim.com', '12345678903', '(11) 99999-9998', 'senha', 2);
     INSERT INTO teacher (person_id) VALUES (pid) RETURNING teacher_id INTO tid;
     INSERT INTO teacher_subject (teacher_id, subject_id) VALUES (tid, 10);
 
     -- 3. Fernanda Santos (Humanas)
-    pid := create_person('Fernanda', 'Yoshimoto Santos Dias', 'fernanda.yoshimoto@jardimencantado.com', '12345678904', '(11) 99999-9996', 'senha', 2);
+    pid := create_person('Fernanda', 'Yoshimoto', 'fernanda.yoshimoto@jardim.com', '12345678904', '(11) 99999-9996', 'senha', 2);
     INSERT INTO teacher (person_id) VALUES (pid) RETURNING teacher_id INTO tid;
     INSERT INTO teacher_subject (teacher_id, subject_id) VALUES (tid, 4), (tid, 5);
 
     -- 4. Mariana Gómez (Línguas)
-    pid := create_person('Mariana', 'Gómez Morais Arrudão', 'mariana.gomez@jardimencantado.com', '12345678905', '(11) 99999-9995', 'senha', 2);
+    pid := create_person('Mariana', 'Gómez Arrudão', 'mariana.gomez@jardim.com', '12345678905', '(11) 99999-9995', 'senha', 2);
     INSERT INTO teacher (person_id) VALUES (pid) RETURNING teacher_id INTO tid;
     INSERT INTO teacher_subject (teacher_id, subject_id) VALUES (tid, 7), (tid, 8);
 
     -- 5. Ricardo Oliveira (Educação Física)
-    pid := create_person('Ricardo', 'Oliveira Prado Júnior', 'ricardo.junior@jardimencantado.com', '12345678906', '(11) 99999-9994', 'senha', 2);
+    pid := create_person('Ricardo', 'Oliveira Júnior', 'ricardo.junior@jardim.com', '12345678906', '(11) 99999-9994', 'senha', 2);
     INSERT INTO teacher (person_id) VALUES (pid) RETURNING teacher_id INTO tid;
     INSERT INTO teacher_subject (teacher_id, subject_id) VALUES (tid, 9);
 
     -- 6. Beatriz Lira (Arte e Música)
-    pid := create_person('Beatriz', 'Jacques Barbosa Telem', 'beatriz.telem@jardimencantado.com', '12345678907', '(11) 99999-9993', 'senha', 2);
+    pid := create_person('Beatriz', 'Jacques Telem', 'beatriz.telem@jardim.com', '12345678907', '(11) 99999-9993', 'senha', 2);
     INSERT INTO teacher (person_id) VALUES (pid) RETURNING teacher_id INTO tid;
     INSERT INTO teacher_subject (teacher_id, subject_id) VALUES (tid, 6), (tid, 11);
 
@@ -159,7 +159,7 @@ BEGIN
     PERFORM create_student(
         'Lucas',
         'Silva Costa',
-        'lucas.costa@jardimencantado.com',
+        'lucas.costa@jardim.com',
         '12345678912',
         '(11) 97777-1111',
         'senha'
@@ -168,7 +168,7 @@ BEGIN
     PERFORM create_student(
         'Mariana',
         'Silva Costa',
-        'mariana.costa@jardimencantado.com',
+        'mariana.costa@jardim.com',
         '12345678913',
         '(11) 97777-2222',
         'senha'
@@ -232,11 +232,14 @@ VALUES (1, 1, 8.5, 'Aluno demonstrou bom desempenho', 1),
 -- School Event Types
 INSERT INTO
     school_event_type (name)
-VALUES ('EXAM'),
-    ('HOLIDAY'),
-    ('STUDENT CYCLE'),
-    ('OCCURRENCE'),
-    ('OTHER');
+VALUES ('OUTROS'),
+    ('EXAME'),
+    ('FERIADO'),
+    ('ANO LETIVO'),
+    ('OCORRÊNCIA'),
+    ('REUNIÃO'),
+    ('ATIVIDADE EXTRACURRICULAR'),
+    ('COMUNICADO');
 
 -------------------------------------------------------------------------------------------
 -- School Events
@@ -249,6 +252,8 @@ INSERT INTO
     created_by,
     event_type_id
 )
-VALUES ('Prova de Matemática', 'Avaliação do 1º bimestre', '2026-04-10 09:00:00', 1, 1),
-    ('Feriado - Tiradentes', 'Não haverá aula', '2026-04-21 00:00:00', 1, 2);
+VALUES ('Prova de Matemática', 'Avaliação do 1º bimestre', '2026-04-10 09:00:00', 1, 2),
+    ('Feriado - Tiradentes', 'Não haverá aula', '2026-04-21 00:00:00', 1, 3),
+    ('Reunião de Pais', 'Encontro para discutir o progresso dos alunos', '2026-05-15 18:00:00', 1, 6),
+    ('Teatro de Música', 'Oficina de teatro para os alunos interessados', '2026-06-20 14:00:00', 1, 7);
 
