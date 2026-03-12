@@ -127,6 +127,15 @@ CREATE TABLE classroom_group (
     
 );
 
+CREATE TABLE classroom_group_student (
+    classroom_group_student_id SERIAL PRIMARY KEY,
+    group_id                  INTEGER NOT NULL,
+    student_id                INTEGER NOT NULL,
+
+    FOREIGN KEY (group_id) REFERENCES classroom_group(group_id),
+    FOREIGN KEY (student_id) REFERENCES student(student_id)
+);
+
 
 -- Grading
 
