@@ -185,6 +185,15 @@ VALUES (1, 1),
     (2, 1),
     (2, 2);
 
+
+-------------------------------------------------------------------------------------------
+-- Student Classroom group
+INSERT INTO
+    classroom_group_student (group_id, student_id)
+VALUES (1, 1), -- Lucas in Turma A (1º Ano)
+    (2, 2); -- Mariana in Turma B (2º Ano)
+
+
 -------------------------------------------------------------------------------------------
 -- Address
 
