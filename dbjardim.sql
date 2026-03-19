@@ -63,7 +63,7 @@ CREATE TABLE address (
     state           VARCHAR(100) NOT NULL,
     person_id       INTEGER NOT NULL,
 
-    FOREIGN KEY (person_id) REFERENCES person(person_id)
+    FOREIGN KEY (person_id) REFERENCES person(person_id) ON DELETE CASCADE
 );
 
 
@@ -81,8 +81,8 @@ CREATE TABLE student (
     student_id      SERIAL PRIMARY KEY,
     person_id       INTEGER NOT NULL,
     enrollment_id   INTEGER NOT NULL,
-    FOREIGN KEY (person_id) REFERENCES person(person_id),
-    FOREIGN KEY (enrollment_id) REFERENCES enrollment(enrollment_id)
+    FOREIGN KEY (person_id) REFERENCES person(person_id) ON DELETE CASCADE,
+    FOREIGN KEY (enrollment_id) REFERENCES enrollment(enrollment_id) ON DELETE CASCADE
 );
 
 -- Teacher
@@ -92,7 +92,7 @@ CREATE TABLE teacher (
     teacher_id      SERIAL PRIMARY KEY,
     person_id       INTEGER NOT NULL,
 
-    FOREIGN KEY (person_id) REFERENCES person(person_id)
+    FOREIGN KEY (person_id) REFERENCES person(person_id) ON DELETE CASCADE
 );
 
 CREATE TABLE study_subject (
@@ -106,8 +106,8 @@ CREATE TABLE teacher_subject (
     teacher_id         INTEGER NOT NULL,
     subject_id         INTEGER NOT NULL,
 
-    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id),
-    FOREIGN KEY (subject_id) REFERENCES study_subject(subject_id)
+    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES study_subject(subject_id) ON DELETE CASCADE
 );
 
 -- Classroom
@@ -124,8 +124,8 @@ CREATE TABLE classroom_group (
     classroom_id    INTEGER NOT NULL,
     teacher_id      INTEGER NOT NULL,
 
-    FOREIGN KEY (classroom_id) REFERENCES classroom(classroom_id),
-    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)
+    FOREIGN KEY (classroom_id) REFERENCES classroom(classroom_id) ON DELETE CASCADE,
+    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id) ON DELETE CASCADE
     
 );
 
@@ -134,8 +134,8 @@ CREATE TABLE classroom_group_student (
     group_id                  INTEGER NOT NULL,
     student_id                INTEGER NOT NULL,
 
-    FOREIGN KEY (group_id) REFERENCES classroom_group(group_id),
-    FOREIGN KEY (student_id) REFERENCES student(student_id)
+    FOREIGN KEY (group_id) REFERENCES classroom_group(group_id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE
 );
 
 
@@ -151,9 +151,9 @@ CREATE TABLE grading (
     update_date         TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     given_by_teacher_id INTEGER NOT NULL,
 
-    FOREIGN KEY (student_id) REFERENCES student(student_id),
-    FOREIGN KEY (subject_id) REFERENCES study_subject(subject_id),
-    FOREIGN KEY (given_by_teacher_id) REFERENCES teacher(teacher_id)
+    FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES study_subject(subject_id) ON DELETE CASCADE,
+    FOREIGN KEY (given_by_teacher_id) REFERENCES teacher(teacher_id) ON DELETE CASCADE
 );
 
 -- Guardian
@@ -162,7 +162,7 @@ CREATE TABLE guardian (
     guardian_id     SERIAL PRIMARY KEY,
     person_id       INTEGER NOT NULL,
 
-    FOREIGN KEY (person_id) REFERENCES person(person_id)
+    FOREIGN KEY (person_id) REFERENCES person(person_id) ON DELETE CASCADE
 );
 
 CREATE TABLE student_guardian (
@@ -170,8 +170,8 @@ CREATE TABLE student_guardian (
     student_id          INTEGER NOT NULL,
     guardian_id         INTEGER NOT NULL,
 
-    FOREIGN KEY (student_id) REFERENCES student(student_id),
-    FOREIGN KEY (guardian_id) REFERENCES guardian(guardian_id)
+    FOREIGN KEY (student_id) REFERENCES student(student_id) ON DELETE CASCADE,
+    FOREIGN KEY (guardian_id) REFERENCES guardian(guardian_id) ON DELETE CASCADE
 );
 
 -- Administrative Staff
@@ -180,7 +180,7 @@ CREATE TABLE admin(
     admin_id        SERIAL PRIMARY KEY,
     person_id       INTEGER NOT NULL,
 
-    FOREIGN KEY (person_id) REFERENCES person(person_id)
+    FOREIGN KEY (person_id) REFERENCES person(person_id) ON DELETE CASCADE
 );
 
 
@@ -201,8 +201,8 @@ CREATE TABLE school_event (
     update_date     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     event_type_id      INTEGER NOT NULL,
 
-    FOREIGN KEY (created_by) REFERENCES person(person_id),
-    FOREIGN KEY (event_type_id) REFERENCES school_event_type(event_type_id)
+    FOREIGN KEY (created_by) REFERENCES person(person_id) ON DELETE CASCADE,
+    FOREIGN KEY (event_type_id) REFERENCES school_event_type(event_type_id) ON DELETE CASCADE
 );
 
 -- Schedules
@@ -216,7 +216,7 @@ CREATE TABLE schedule (
     create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (group_id) REFERENCES classroom_group(group_id)
+    FOREIGN KEY (group_id) REFERENCES classroom_group(group_id) ON DELETE CASCADE
 );
 
 CREATE TABLE schedule_item (
@@ -231,6 +231,6 @@ CREATE TABLE schedule_item (
     end_time TIME NOT NULL,
 
     FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES study_subject(subject_id),
-    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)
+    FOREIGN KEY (subject_id) REFERENCES study_subject(subject_id) ON DELETE CASCADE,
+    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id) ON DELETE CASCADE
 );
