@@ -267,9 +267,28 @@ VALUES ('Prova de Matemática', 'Avaliação do 1º bimestre', '2026-04-10 09:00
     ('Teatro de Música', 'Oficina de teatro para os alunos interessados', '2026-06-20 14:00:00', 1, 7);
 
 -------------------------------------------------------------------------------------------
+-- Schedule
+INSERT INTO
+    schedule (group_id, start_time, end_time)
+VALUES (1, '08:00:00'::TIME, '09:00:00'::TIME), -- Turma A - 1º Ano
+    (2, '09:00:00'::TIME, '10:00:00'::TIME); -- Turma B - 2º Ano
+
+
+-------------------------------------------------------------------------------------------
+-- Schedule items
+
+INSERT INTO
+    schedule_item (schedule_id, subject_id, teacher_id)
+VALUES (1, 1, 1), -- Turma A - Português com Raissa
+    (1, 2, 1), -- Turma A - Matemática com Raissa
+    (2, 1, 1), -- Turma B - Português com Raissa
+    (2, 4, 6); -- Turma B - Música com Beatriz
+
+
+-------------------------------------------------------------------------------------------
 -- Photos from unsplash for the first 11 people (admin + 6 teachers + 4 guardians) (cc-by-sa)
 
-UPDATE person SET photo_url NULL;
+UPDATE person SET photo_url = NULL;
 
 UPDATE person
 SET photo_url = CASE person_id
