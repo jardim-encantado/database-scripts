@@ -260,6 +260,8 @@ VALUES ('Prova de Matemática', 'Avaliação do 1º bimestre', '2026-04-10 09:00
 -------------------------------------------------------------------------------------------
 -- Photos from unsplash for the first 11 people (admin + 6 teachers + 4 guardians) (cc-by-sa)
 
+UPDATE person SET photo_url NULL;
+
 UPDATE person
 SET photo_url = CASE person_id
     WHEN 1 THEN 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600&h=800'
