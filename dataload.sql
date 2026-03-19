@@ -257,3 +257,23 @@ VALUES ('Prova de Matemática', 'Avaliação do 1º bimestre', '2026-04-10 09:00
     ('Reunião de Pais', 'Encontro para discutir o progresso dos alunos', '2026-05-15 18:00:00', 1, 6),
     ('Teatro de Música', 'Oficina de teatro para os alunos interessados', '2026-06-20 14:00:00', 1, 7);
 
+-------------------------------------------------------------------------------------------
+-- Photos from unsplash for the first 11 people (admin + 6 teachers + 4 guardians) (cc-by-sa)
+
+
+UPDATE person
+SET photo_url = CASE person_id
+    WHEN 1 THEN 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600&h=800'
+    WHEN 2 THEN 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600&h=800'
+    WHEN 3 THEN 'https://images.pxfuel.com/preview/440/944/813/man-portrait-guy-face.jpg'
+    WHEN 4 THEN 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&q=80&w=600&h=800'
+    WHEN 5 THEN 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600&h=800'
+    WHEN 6 THEN 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600&h=800'
+    WHEN 7 THEN 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=600&h=800'
+    WHEN 8 THEN 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=600&h=800'
+    WHEN 9 THEN 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=600&h=800'
+    WHEN 10 THEN 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=600&h=800'
+    WHEN 11 THEN 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&q=80&w=600&h=800'
+    ELSE photo_url
+END
+WHERE person_id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
