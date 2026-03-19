@@ -23,6 +23,8 @@ DROP TABLE IF EXISTS school_event_type CASCADE;
 DROP TABLE IF EXISTS classroom_group CASCADE;
 DROP TABLE IF EXISTS classroom CASCADE;
 DROP TABLE IF EXISTS grading CASCADE;
+DROP TABLE IF EXISTS schedule CASCADE;
+DROP TABLE IF EXISTS schedule_item CASCADE;
 
 -- PERSON
 
@@ -201,4 +203,34 @@ CREATE TABLE school_event (
 
     FOREIGN KEY (created_by) REFERENCES person(person_id),
     FOREIGN KEY (event_type_id) REFERENCES school_event_type(event_type_id)
+);
+
+-- Schedules
+
+CREATE TABLE schedule (
+    schedule_id SERIAL PRIMARY KEY,
+    group_id INTEGER NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (group_id) REFERENCES classroom_group(group_id)
+);
+
+CREATE TABLE schedule_item (
+    schedule_item_id SERIAL PRIMARY KEY,
+
+    schedule_id INTEGER NOT NULL,
+    subject_id INTEGER NOT NULL,
+    teacher_id INTEGER NOT NULL,
+
+    day_of_week INTEGER NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+
+    FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES study_subject(subject_id),
+    FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)
 );
